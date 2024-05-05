@@ -1,33 +1,40 @@
-// Initialize Twitch Embeds with a function to adjust themes
-function createTwitchEmbed(elementId, channelName) {
-    return new Twitch.Embed(elementId, {
+function loadTwitchChats(theme) {
+    const embedOptions = {
         width: "100%",
         height: "100%",
-        channel: channelName,
-        theme: localStorage.getItem('theme') || 'light', // Use saved theme or default to light
-        layout: "video-with-chat"
+        layout: "video-with-chat",
+        theme: theme
+    };
+
+    new Twitch.Embed("bee-chat1", {
+        ...embedOptions,
+        channel: "boringlittlebee"
+    });
+
+    new Twitch.Embed("stress-chat2", {
+        ...embedOptions,
+        channel: "stresswars"
+    });
+
+    new Twitch.Embed("lan-chat3", {
+        ...embedOptions,
+        channel: "lanitee"
     });
 }
 
-// Embeds for each channel
-const beeChat = createTwitchEmbed("bee-chat1", "boringlittlebee");
-const stressChat = createTwitchEmbed("stress-chat2", "stresswars");
-const lanChat = createTwitchEmbed("lan-chat3", "lantee");
-
-// Toggle night mode function
-function toggleNightMode() {
-    document.body.classList.toggle('night-mode');
-    const theme = document.body.classList.contains('night-mode') ? 'dark' : 'light';
-    localStorage.setItem('theme', theme); // Save theme to local storage
-    
-    // Update Twitch embeds to the new theme
-    beeChat.setTheme(theme);
-    stressChat.setTheme(theme);
-    lanChat.setTheme(theme);
+function loadTheme() {
+    const theme = localStorage.getItem('theme') || 'light'; // Default to light theme
+    document.body.setAttribute('data-theme', theme);
+    loadTwitchChats(theme);
 }
 
-// Set initial theme based on local storage
-document.body.classList.add(localStorage.getItem('theme') === 'dark' ? 'night-mode' : '');
+function toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    loadTwitchChats(newTheme);
+}
 
-// Event listener for button
-document.getElementById('toggle-theme').addEventListener('click', toggleNightMode);
+document.getElementById('mode-toggle').addEventListener('click', toggleTheme);
+window.addEventListener('DOMContentLoaded', loadTheme); // Ensure this runs when the page is fully loaded
