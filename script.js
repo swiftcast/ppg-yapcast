@@ -1,4 +1,12 @@
 function loadTwitchChats(theme) {
+
+    const chatContainers = ["bee-chat1", "stress-chat2", "lan-chat3"];
+
+    // Clear existing embeds
+    chatContainers.forEach(container => {
+        const chatElement = document.getElementById(container);
+        chatElement.innerHTML = ''; // Clear the containe   
+    });
     const embedOptions = {
         width: "100%",
         height: "100%",
