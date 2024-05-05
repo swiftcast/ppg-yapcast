@@ -49,12 +49,6 @@ out/
 # Dependency directories
 jspm_packages/
 
-# TypeScript compiled files
-*.tsbuildinfo
-*.d.ts
-*.js
-*.js.map
-
 # Optional eslint cache
 .eslintcache
 
