@@ -1,0 +1,16 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.chat-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+}
+
+#bee-chat1, #stress-chat2, #lan-chat3 {
+    width: 30%;
+    height: 100%;
+}
